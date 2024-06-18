@@ -14,7 +14,7 @@ let
     owner = "mealie-recipes";
     repo = "mealie";
     rev = "v${version}";
-    hash = "";
+    hash = "sha256-gg7ClclBS9j9n4/3HLxbX8HXTz9Zw5+BYG2MEYRsRBU=";
   };
 
   frontend = callPackage (import ./mealie-frontend.nix src version) { };
