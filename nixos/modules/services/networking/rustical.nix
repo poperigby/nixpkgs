@@ -66,7 +66,7 @@ in
       '';
     };
     environment = mkOption {
-      type = attrsOf (either int str);
+      type = attrsOf (either str (either int bool));
       default = { };
       description = ''
         Environment variables passed to the service. Any config option name prefixed with RUSTICAL_ takes priority over the one in the configuration file.
@@ -113,7 +113,7 @@ in
         description = "A CalDAV/CardDAV server";
         after = [ "network.target" ];
         wantedBy = [ "multi-user.target" ];
-        environment = cfg.environment;
+        environment = lib.mapAttrs (_: toString) cfg.environment;
         serviceConfig = {
           Type = "simple";
           ExecStart = "${getExe cfg.package} --config-file ${settingsFormat.generate "config.toml" cfg.settings}";
